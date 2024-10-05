@@ -26,6 +26,37 @@ class TestTriangles(unittest.TestCase):
     def testEquilateralTriangles(self): 
         self.assertEqual(classifyTriangle(1,1,1),'Equilateral','1,1,1 should be equilateral')
 
+        # Test for Invalid Input (side lengths should be > 0)
+    def testInvalidInputZero(self):
+        self.assertEqual(classifyTriangle(0, 0, 0), 'InvalidInput', '0,0,0 should return InvalidInput')
+        
+    def testInvalidInputNegative(self):
+        self.assertEqual(classifyTriangle(-1, -1, -1), 'InvalidInput', '-1,-1,-1 should return InvalidInput')
+    
+    # Test for sides exceeding 200
+    def testInvalidInputExceedsMax(self):
+        self.assertEqual(classifyTriangle(201, 1, 1), 'InvalidInput', '201,1,1 should return InvalidInput')
+    
+    # Test for non-integer values
+    def testNonIntegerInput(self):
+        self.assertEqual(classifyTriangle(1.5, 2.5, 3.5), 'InvalidInput', '1.5, 2.5, 3.5 should return InvalidInput')
+
+    # Test for NotATriangle cases
+    def testNotATriangleA(self):
+        self.assertEqual(classifyTriangle(1, 2, 3), 'NotATriangle', '1,2,3 should not form a triangle')
+
+    def testNotATriangleB(self):
+        self.assertEqual(classifyTriangle(5, 9, 14), 'NotATriangle', '5,9,14 should not form a triangle')
+    
+    # Test for Isosceles triangle
+    def testIsoscelesTriangle(self):
+        self.assertEqual(classifyTriangle(5, 5, 8), 'Isosceles', '5,5,8 should be Isosceles')
+
+    # Test for Scalene triangle
+    def testScaleneTriangle(self):
+        self.assertEqual(classifyTriangle(7, 8, 9), 'Scalene', '7,8,9 should be Scalene')
+
+
 if __name__ == '__main__':
     print('Running unit tests')
     unittest.main()
