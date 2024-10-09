@@ -10,11 +10,15 @@ jobs:
     steps:
       - checkout
       - run: 
+          name: Install pytest
+          command: pip install pytest
+      - run: 
+          name: Run tests in Homework_2
           command: |
-            pip install pytest
+            cd Homework_2
             pytest --junitxml=test-results/junit.xml TestTriangle.py
       - store_test_results:
-          path: test-results
+          path: Homework_2/test-results
 
 workflows:
   testing_triangles:
